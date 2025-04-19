@@ -17,3 +17,5 @@ Ce shell est capable de lire une commande depuis l’entrée standard, de l’an
 ```bash
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
+
+### Description
