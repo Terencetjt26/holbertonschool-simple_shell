@@ -9,11 +9,17 @@ int main(void)
 	sh_t data = {NULL, 0, NULL};
 	size_t read_size = 0;
 	ssize_t buffer_size = 0;
+	char cwd[PATH_MAX];
 
 	while (1)
 	{
 		if (isatty(0))
-			printf("#cisfun$ ");
+		{
+			if (getcwd(cwd, sizeof(cwd)) != NULL)
+				printf("cisfun:%s$ ", cwd);
+			else
+				perror("getcwd");
+		}
 
 		buffer_size = getline(&data.buffer, &read_size, stdin);
 		if (buffer_size == -1)
