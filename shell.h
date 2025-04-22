@@ -47,6 +47,8 @@ char *get_path(char *command);
 char *get_env(char *name);
 void _env(void);
 int _atoi(char *s);
+void display_prompt(void);
+int process_input(sh_t *data);
 
 /* Builtin handlers */
 
