@@ -1,81 +1,48 @@
 #include "shell.h"
 
 /**
- * execute - executes a command
- * @args: array of arguments
- * Return: status of the command
- */
-int execute(char **args)
-{
-	int status = 0;
-	pid_t pid;
-
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("Fork failed");
-		return (-1);
-	}
-	else if (pid == 0)
-	{
-		if (execve(args[0], args, environ) == -1)
-		{
-			perror("Command not found");
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
-	{
-		wait(&status);
-	}
-	return (status);
-}
-
-/**
- * main - open a shell
- * Return: status
+ * main - entry point of the shell
+ * Return: 0 on success, -1 on failure
  */
 int main(void)
 {
-	char *buffer = NULL, **args = NULL;
+	sh_t data = {NULL, 0, NULL};
 	size_t read_size = 0;
 	ssize_t buffer_size = 0;
-	int status = 0;
 
 	while (1)
 	{
 		if (isatty(0))
 			printf("#cisfun$ ");
 
-		buffer_size = getline(&buffer, &read_size, stdin);
-		if (buffer_size == -1 || _strcmp(buffer, "exit\n") == 0)
+		buffer_size = getline(&data.buffer, &read_size, stdin);
+		if (buffer_size == -1)
 		{
-			free(buffer);
+			free(data.buffer);
 			break;
 		}
-		buffer[buffer_size - 1] = '\0';
+		data.buffer[buffer_size - 1] = '\0';
 
-		if (_strcmp("env", buffer) == 0)
+		if (_empty(data.buffer) == 1)
 		{
-			_env();
+			data.status = 0;
 			continue;
 		}
 
-		if (_empty(buffer) == 1)
+		data.args = tokenize(data.buffer);
+
+		if (handle_builtin(&data) == 0)
 		{
-			status = 0;
+			free(data.args);
 			continue;
 		}
 
-		args = tokenize(buffer);
-		args[0] = get_path(args[0]);
-
-		if (args[0] != NULL)
-			status = execute(args);
+		data.args[0] = get_path(data.args[0]);
+		if (data.args[0] != NULL)
+			data.status = execute_command(data.args);
 		else
-			perror("An error occurred");
-		free(args);
+			perror("Command not found");
+		free(data.args);
 	}
-
-	return (status);
+	return (data.status);
 }
