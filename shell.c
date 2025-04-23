@@ -28,13 +28,17 @@ int main(void)
 void display_prompt(void)
 {
 	char cwd[PATH_MAX];
+	char *user = _getenv("USER");
 
 	if (isatty(0))
 	{
-		if (getcwd(cwd, sizeof(cwd)) != NULL)
-			printf("cisfun:%s$ ", cwd);
-		else
-			perror("getcwd");
+		if (getcwd(cwd, sizeof(cwd)))
+		{
+			if (user)
+				printf("%s@cisfun:%s$ ", user, cwd);
+			else
+				printf("cisfun: %s$ ", cwd);
+		}
 	}
 }
 

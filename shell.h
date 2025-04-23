@@ -44,7 +44,7 @@ void *_calloc(unsigned int nmemb, unsigned int size);
 int execute_command(char **args);
 char **tokenize(char *buffer);
 char *get_path(char *command);
-char *get_env(char *name);
+char *_getenv(char *name);
 void _env(void);
 int _atoi(char *s);
 void display_prompt(void);
