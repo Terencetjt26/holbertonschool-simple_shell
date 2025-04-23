@@ -19,6 +19,7 @@
 - [Manual Pages](#manual-pages)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Memory Leak Check](#memory-leak-check)
 - [Authors &copy;](#authors--copy)
 
 </details>
@@ -105,6 +106,39 @@ total 64
 -rwxr-xr-x 1 root root  1076 Apr 23 15:03 utils.c
 $
 ```
+
+### Memory Leak Check
+```bash
+$ valgrind ./hsh
+==7113== Memcheck, a memory error detector
+==7113== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==7113== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==7113== Command: ./hsh
+==7113== 
+root@cisfun:/home/ubuntu/holbertonschool-simple_shell$ ^C==7113== 
+==7113== Process terminating with default action of signal 2 (SIGINT)
+==7113==    at 0x497AA61: read (read.c:26)
+==7113==    by 0x48F17A4: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:517)
+==7113==    by 0x48E5E0F: getdelim (iogetdelim.c:77)
+==7113==    by 0x109B2B: process_input (in /home/ubuntu/holbertonschool-simple_shell/hsh)
+==7113==    by 0x1099D6: main (in /home/ubuntu/holbertonschool-simple_shell/hsh)
+==7113== 
+==7113== HEAP SUMMARY:
+==7113==     in use at exit: 2,168 bytes in 3 blocks
+==7113==   total heap usage: 3 allocs, 0 frees, 2,168 bytes allocated
+==7113== 
+==7113== LEAK SUMMARY:
+==7113==    definitely lost: 0 bytes in 0 blocks
+==7113==    indirectly lost: 0 bytes in 0 blocks
+==7113==      possibly lost: 0 bytes in 0 blocks
+==7113==    still reachable: 2,168 bytes in 3 blocks
+==7113==         suppressed: 0 bytes in 0 blocks
+==7113== Rerun with --leak-check=full to see details of leaked memory
+==7113== 
+==7113== For lists of detected and suppressed errors, rerun with: -s
+==7113== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+```
+
 
 #### Authors &copy;
 - **Martin Clement** - [Github Profile](https://github.com/ItsZmainDev)
