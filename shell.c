@@ -58,6 +58,7 @@ int process_input(sh_t *data)
 		free(data->buffer);
 		return (-1);
 	}
+
 	data->buffer[buffer_size - 1] = '\0';
 
 	if (_empty(data->buffer) == 1)
@@ -76,7 +77,10 @@ int process_input(sh_t *data)
 
 	data->args[0] = get_path(data->args[0]);
 	if (data->args[0] != NULL)
+	{
 		data->status = execute_command(data->args);
+		free(data->args[0]);
+	}
 	else
 		perror("Command not found");
 
