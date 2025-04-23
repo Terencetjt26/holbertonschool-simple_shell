@@ -40,11 +40,19 @@ int process_input(sh_t *data)
 	data->args = tokenize(data->buffer);
 
 	if (!handle_builtin_commands(data))
+	{
+		data->status = 0;
 		return (0);
+	}
 
 	if (execute_external_command(data) == -1)
-		return (-1);
+	{
+		data->status = 1;
+	}
 
 	free(data->args);
-	return (0);
+	free(data->buffer);
+	data->buffer = NULL;
+	data->args = NULL;
+	return (data->status);
 }
