@@ -50,17 +50,17 @@ int execute_command(char **args);
 char **tokenize(char *buffer);
 char *get_path(char *command);
 char *_getenv(char *name);
-void _env(void);
+int _env(sh_t *data);
 int _atoi(char *s);
 void display_prompt(void);
 int process_input(sh_t *data);
+void sigintH(int sig);
 
 /* Builtin handlers */
 
 int handle_builtin(sh_t *data);
 int builtin_exit(sh_t *data);
 int builtin_cd(sh_t *data);
-int builtin_env(sh_t *data);
 
 extern char **environ;
 

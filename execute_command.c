@@ -13,14 +13,14 @@ int execute_command(char **args)
 	pid = fork();
 	if (pid == -1)
 	{
-		perror("Fork failed");
+		perror("fork");
 		return (-1);
 	}
 	else if (pid == 0)
 	{
 		if (execve(args[0], args, environ) == -1)
 		{
-			perror("Command not found");
+			perror("execve");
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -52,7 +52,7 @@ int execute_external_command(sh_t *data)
 		}
 		else
 		{
-			perror("Command not found");
+			perror("get_path");
 			return (-1);
 		}
 	}

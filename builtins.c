@@ -39,25 +39,6 @@ int builtin_cd(sh_t *data)
 }
 
 /**
- * builtin_env - prints the environment variables
- * @data: data structure containing shell information
- * Return: 0 on success, -1 on failure
- */
-int builtin_env(sh_t *data)
-{
-	int i = 0;
-	(void)data;
-
-	while (environ[i])
-	{
-		printf("%s\n", environ[i]);
-		i++;
-	}
-
-	return (0);
-}
-
-/**
  * handle_builtin - handles built-in commands
  * @data: data structure containing shell information
  * Return: 0 on success, -1 on failure
@@ -67,7 +48,7 @@ int handle_builtin(sh_t *data)
 	int i = 0;
 	builtin_t builtins[] = {
 		{"exit", builtin_exit},
-		{"env", builtin_env},
+		{"env", _env},
 		{"cd", builtin_cd},
 		{NULL, NULL}
 	};

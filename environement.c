@@ -34,15 +34,18 @@ char *_getenv(char *name)
 
 /**
  * _env - print the environment variables
- * Return: void
+ * @data: data structure containing shell information
+ * Return: 0 on success, -1 on failure
  */
-void _env(void)
+int _env(sh_t *data)
 {
 	int i = 0;
+	(void)data;
 
 	while (environ[i])
 	{
 		printf("%s\n", environ[i]);
 		i++;
 	}
+	return (0);
 }
