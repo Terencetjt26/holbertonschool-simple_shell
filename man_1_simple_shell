@@ -1,1 +1,61 @@
-.
+.TH SIMPLE_SHELL 1 "April 2025" "Version 1.0.0" "Simple Shell Manual"
+
+.SH NAME
+simple_shell \- A simple UNIX command interpreter.
+
+.SH SYNOPSIS
+.B ./hsh
+
+.SH DESCRIPTION
+.B simple_shell
+is a simple UNIX command interpreter that mimics the behavior of the original Bourne shell (sh). It provides a basic command-line interface for users to execute commands and manage processes.
+
+.SH USAGE
+The shell can be used in two modes:
+.TP
+.B Interactive Mode
+The shell prompts the user for input and executes commands line by line.
+.TP
+.B Non-Interactive Mode
+The shell reads commands from a file or standard input and executes them.
+
+.SH OPTIONS
+.B script_file
+Specifies a file containing commands to execute in non-interactive mode.
+
+.SH BUILT-IN COMMANDS
+The following built-in commands are supported:
+.TP
+.B cd
+Change the current working directory.
+.TP
+.B exit
+Exit the shell.
+.TP
+.B env
+Display the current environment variables.
+
+.SH EXAMPLES
+.TP
+.B Interactive Mode:
+.nf
+$ ./hsh
+$ ls
+$ pwd
+$ exit
+.fi
+.TP
+.B Non-Interactive Mode:
+.nf
+$ echo "ls -l" | ./hsh
+.fi
+
+.SH AUTHORS
+.B Martin Clement
+<10586@holbertonstudents.com>
+.br
+.B Terence Tengue
+<10597@holbertonstudents.com>
+
+.SH COPYRIGHT
+This project is released under the Holberton School license.
