@@ -82,3 +82,18 @@ int handle_builtin(sh_t *data)
 	}
 	return (-1);
 }
+
+/**
+ * handle_builtin_commands - handles builtin commands
+ * @data: Pointer to the shell data structure
+ * Return: 0 on success, 1 on failure
+ */
+int handle_builtin_commands(sh_t *data)
+{
+	if (handle_builtin(data) == 0)
+	{
+		free(data->args);
+		return (0);
+	}
+	return (1);
+}

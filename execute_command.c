@@ -30,3 +30,31 @@ int execute_command(char **args)
 	}
 	return (status);
 }
+
+/**
+ * execute_external_command - executes an external command
+ * @data: Pointer to the shell data structure
+ * Return: 0 on success, -1 on failure
+ */
+int execute_external_command(sh_t *data)
+{
+	if (data->args[0][0] == '/')
+	{
+		data->status = execute_command(data->args);
+	}
+	else
+	{
+		data->args[0] = get_path(data->args[0]);
+		if (data->args[0])
+		{
+			data->status = execute_command(data->args);
+			free(data->args[0]);
+		}
+		else
+		{
+			perror("Command not found");
+			return (-1);
+		}
+	}
+	return (0);
+}
