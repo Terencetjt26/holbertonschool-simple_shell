@@ -19,7 +19,8 @@ int builtin_exit(sh_t *data)
 	}
 	free(data->buffer);
 	free(data->args);
-	exit(status);
+	exit(EXIT_SUCCESS);
+	return (0);
 }
 
 /**
