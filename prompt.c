@@ -19,17 +19,4 @@ void display_prompt(void)
 				printf("cisfun: %s$ ", cwd);
 		}
 	}
-
-	signal(SIGINT, sigintH);
-}
-
-/**
- * sigintH - handles the SIGINT signal
- * @sig: signal number
- * Return: void
- */
-void sigintH(int sig)
-{
-	(void)sig;
-	write(STDOUT_FILENO, "\n$ ", 3);
 }
