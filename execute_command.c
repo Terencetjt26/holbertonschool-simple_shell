@@ -38,7 +38,7 @@ int execute_command(char **args)
  */
 int execute_external_command(sh_t *data)
 {
-	if (data->args[0][0] == '/' data->args[0][0] == '.')
+	if (data->args[0][0] == '/'n || data->args[0][0] == '.')
 	{
 		data->status = execute_command(data->args);
 	}
