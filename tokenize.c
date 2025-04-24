@@ -1,5 +1,7 @@
 #include "shell.h"
 
+#define BUFFER 1024
+
 /**
  * tokenize - splits a string into tokens
  * @buffer: string to split
@@ -9,18 +11,25 @@ char **tokenize(char *buffer)
 {
 	char **tokens;
 	char *token;
-	int i = 0;
+	unsigned int i;
 
-	tokens = malloc(sizeof(char *) * 64);
-	if (!tokens)
-		return (NULL);
-
-	token = strtok(buffer, " \t\r\n");
-	while (token)
+	tokens = malloc(sizeof(char) * BUFFER);
+	if (tokens == NULL)
 	{
-		tokens[i++] = token;
-		token = strtok(NULL, " \t\r\n");
+		perror("Error: malloc failed");
+		exit(EXIT_FAILURE);
 	}
+
+	token = strtok(buffer, "\n\t\r ");
+
+	i = 0;
+	while (token != NULL)
+	{
+		tokens[i] = token;
+		token = strtok(NULL, "\n\t\r ");
+		i++;
+	}
+
 	tokens[i] = NULL;
 
 	return (tokens);
