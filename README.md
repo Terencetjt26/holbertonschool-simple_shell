@@ -110,7 +110,7 @@ total 64
 $
 ```
 
-### Memory Leak Check
+#### Memory Leak Check
 ```bash
 $ valgrind ./hsh
 ==7113== Memcheck, a memory error detector
@@ -141,6 +141,9 @@ root@cisfun:/home/ubuntu/holbertonschool-simple_shell$ ^C==7113==
 ==7113== For lists of detected and suppressed errors, rerun with: -s
 ==7113== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 ```
+
+#### Flowchart
+![Flowchart](flowchart.png)
 
 
 #### Authors &copy;
