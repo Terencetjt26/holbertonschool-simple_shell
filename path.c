@@ -7,7 +7,7 @@
  */
 char *get_path(char *command)
 {
-	char *path = getenv("PATH");
+	char *path = _getenv("PATH");
 	char *path_copy = strdup(path);
 	char *token = strtok(path_copy, ":");
 	struct stat buffer;
