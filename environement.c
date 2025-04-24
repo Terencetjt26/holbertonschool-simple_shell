@@ -7,20 +7,29 @@
  */
 char *_getenv(char *name)
 {
-	int i, j;
-	size_t len = _strlen(name);
+	int i = 0, j;
+	int status = 0;
 
-	for (i = 0; environ[i]; i++)
+	while (environ[i])
 	{
-		for (j = 0; j < (int)len; j++)
+		status = 1;
+
+		for (j = 0; environ[i][j] != '='; j++)
 		{
 			if (environ[i][j] != name[j])
+			{
+				status = 0;
 				break;
+			}
 		}
-		if (j == (int)len && environ[i][j] == '=')
-			return (_strdup(environ[i] + len + 1));
+		if (status == 1 && environ[i][j] == '=')
+		{
+			break;
+		}
+		i++;
 	}
-	return (NULL);
+
+	return (environ[i] + j + 1);
 }
 
 /**
@@ -35,10 +44,8 @@ int _env(sh_t *data)
 
 	while (environ[i])
 	{
-		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
-		write(STDOUT_FILENO, "\n", 1);
+		printf("%s\n", environ[i]);
 		i++;
 	}
-
 	return (0);
 }

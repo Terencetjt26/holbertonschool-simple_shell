@@ -43,7 +43,6 @@ int execute_external_command(sh_t *data);
 int process_input(sh_t *data);
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
-char *_strdup(char *s);
 int _empty(char *buffer);
 char **_split(char *str, char *sep);
 void *_calloc(unsigned int nmemb, unsigned int size);
