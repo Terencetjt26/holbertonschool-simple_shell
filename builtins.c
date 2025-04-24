@@ -73,7 +73,6 @@ int handle_builtin_commands(sh_t *data)
 {
 	if (handle_builtin(data) == 0)
 	{
-		free(data->args);
 		return (0);
 	}
 	return (1);
