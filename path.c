@@ -8,13 +8,21 @@
 char *get_path(char *command)
 {
 	char *path = _getenv("PATH");
-	char *path_copy = strdup(path);
-	char *token = strtok(path_copy, ":");
+	char *path_copy, *token;
 	struct stat buffer;
+
+	if (!path)
+		return (NULL);
+
+	path_copy = _strdup(path);
+	if (path_copy == NULL)
+		return (NULL);
+
+	token = strtok(path_copy, ":");
 
 	while (token != NULL)
 	{
-		char *full_path = malloc(strlen(token) + strlen(command) + 2);
+		char *full_path = malloc(_strlen(token) + _strlen(command) + 2);
 
 		if (full_path == NULL)
 		{

@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef SHELL_H
+#define SHELL_H
 
 /* LIBRARIES */
 #include <stdio.h>
@@ -51,7 +51,7 @@ char *get_path(char *command);
 char *_getenv(char *name);
 int _env(sh_t *data);
 int _atoi(char *s);
-int process_input(sh_t *data);
+char *_strdup(const char *str);
 
 /* Builtin handlers */
 
@@ -61,4 +61,4 @@ int builtin_cd(sh_t *data);
 
 extern char **environ;
 
-#endif /* MAIN_H */
+#endif /* SHELL_H */

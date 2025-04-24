@@ -10,6 +10,12 @@ int execute_command(char **args)
 	int status = 0;
 	pid_t pid;
 
+	if (access(args[0], X_OK) == -1)
+	{
+		perror("access");
+		return (-1);
+	}
+
 	pid = fork();
 	if (pid == -1)
 	{
@@ -26,7 +32,16 @@ int execute_command(char **args)
 	}
 	else
 	{
-		wait(&status);
+		if (wait(&status) == -1)
+		{
+			perror("wait");
+			return (-1);
+		}
+
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+		else
+			return (-1);
 	}
 	return (status);
 }
@@ -38,16 +53,24 @@ int execute_command(char **args)
  */
 int execute_external_command(sh_t *data)
 {
+	char *full_path = NULL;
+	char *cmd_args[3];
+
 	if (data->args[0][0] == '/' || data->args[0][0] == '.')
 	{
 		data->status = execute_command(data->args);
 	}
 	else
 	{
-		data->args[0] = get_path(data->args[0]);
-		if (data->args[0])
+		full_path = get_path(data->args[0]);
+		if (full_path)
 		{
-			data->status = execute_command(data->args);
+			cmd_args[0] = full_path;
+			cmd_args[1] = data->args[1];
+			cmd_args[2] = NULL;
+
+			data->status = execute_command(cmd_args);
+			free(full_path);
 		}
 		else
 		{

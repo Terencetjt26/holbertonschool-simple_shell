@@ -33,6 +33,8 @@ int process_input(sh_t *data)
 
 	if (_empty(data->buffer))
 	{
+		free(data->buffer);
+		data->buffer = NULL;
 		data->status = 0;
 		return (0);
 	}
@@ -42,6 +44,10 @@ int process_input(sh_t *data)
 	if (!handle_builtin_commands(data))
 	{
 		data->status = 0;
+		free(data->args);
+		free(data->buffer);
+		data->args = NULL;
+		data->buffer = NULL;
 		return (0);
 	}
 
@@ -54,5 +60,6 @@ int process_input(sh_t *data)
 	free(data->buffer);
 	data->buffer = NULL;
 	data->args = NULL;
+
 	return (data->status);
 }

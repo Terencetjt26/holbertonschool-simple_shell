@@ -8,13 +8,12 @@
 char *_getenv(char *name)
 {
 	int i = 0, j;
-	int status = 0;
+	int status;
 
 	while (environ[i])
 	{
 		status = 1;
-
-		for (j = 0; environ[i][j] != '='; j++)
+		for (j = 0; environ[i][j] != '=' && name[j]; j++)
 		{
 			if (environ[i][j] != name[j])
 			{
@@ -22,14 +21,12 @@ char *_getenv(char *name)
 				break;
 			}
 		}
-		if (status == 1 && environ[i][j] == '=')
-		{
-			break;
-		}
+		if (status && environ[i][j] == '=' && name[j] == '\0')
+			return (environ[i] + j + 1);
+
 		i++;
 	}
-
-	return (environ[i] + j + 1);
+	return (NULL);
 }
 
 /**

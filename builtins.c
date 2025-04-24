@@ -29,12 +29,12 @@ int builtin_exit(sh_t *data)
  */
 int builtin_cd(sh_t *data)
 {
-	if (data->args[1] == NULL)
-		return (-1);
+	char *dir = data->args[1];
 
-	if (chdir(data->args[1]) == -1)
+	if (dir == NULL)
+		dir = _getenv("HOME");
+	if (dir == NULL || chdir(dir) == -1)
 		return (-1);
-
 	return (0);
 }
 

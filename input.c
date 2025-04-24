@@ -12,10 +12,15 @@ int read_user_input(sh_t *data)
 
 	if (buffer_size == -1)
 	{
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "\n", 1);
+
 		free(data->buffer);
 		return (-1);
 	}
 
-	data->buffer[buffer_size - 1] = '\0';
+	if (data->buffer[buffer_size - 1] == '\n')
+		data->buffer[buffer_size - 1] = '\0';
+
 	return (0);
 }

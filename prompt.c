@@ -7,7 +7,12 @@
 void display_prompt(void)
 {
 	char cwd[PATH_MAX];
-	char *user = _getenv("USER");
+	char *user;
+
+	if (!isatty(STDIN_FILENO))
+		return;
+
+	user = _getenv("USER");
 
 	if (isatty(0))
 	{
@@ -18,5 +23,13 @@ void display_prompt(void)
 			else
 				printf("cisfun:%s$ ", cwd);
 		}
+		else
+		{
+			if (user)
+				printf("%s@cisfun:$ ", user);
+			else
+				printf("cisfun:$ ");
+		}
 	}
+	fflush(stdout);
 }

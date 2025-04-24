@@ -12,11 +12,10 @@ int _strcmp(char *s1, char *s2)
 	{
 		if (*s1 != *s2)
 			return (*s1 - *s2);
-
 		s1++;
 		s2++;
 	}
-	return (0);
+	return (*s1 - *s2);
 }
 
 /**
@@ -58,22 +57,37 @@ int _empty(char *buffer)
  */
 int _atoi(char *s)
 {
-	int i = 0, sign = 1, num = 0;
+	int i = 0, sign = 1, result = 0;
 
-	while ((s[i] < '0' || s[i] > '9') && s[i] != '\0')
+	while (s[i] == ' ')
+		i++;
+	if (s[i] == '-' || s[i] == '+')
 	{
 		if (s[i] == '-')
-		{
-			sign *= -1;
-			i++;
-		}
-	}
-
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		num = num * 10 + sign * (s[i] - '0');
+			sign = -1;
 		i++;
 	}
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+		result = result * 10 + (s[i] - '0');
+		i++;
+	}
+	return (result * sign);
+}
 
-	return (num);
+/**
+ * _strdup - duplicates a string
+ * @str: string to duplicate
+ * Return: pointer to the duplicated string
+ */
+char *_strdup(const char *str)
+{
+	int len = strlen(str);
+	char *dup = malloc(len + 1);
+
+	if (dup == NULL)
+		return (NULL);
+
+	strcpy(dup, str);
+	return (dup);
 }
