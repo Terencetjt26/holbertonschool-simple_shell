@@ -51,7 +51,7 @@ int process_input(sh_t *data)
 		return (0);
 	}
 
-	if (execute_external_command(data) == -1)
+	if (execute_command(data->args) == -1)
 	{
 		data->status = 1;
 	}

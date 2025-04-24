@@ -39,10 +39,9 @@ typedef struct builtin_t
 void display_prompt(void);
 int read_user_input(sh_t *data);
 int handle_builtin_commands(sh_t *data);
-int execute_external_command(sh_t *data);
 int process_input(sh_t *data);
 int _strcmp(char *s1, char *s2);
-int _strlen(char *s);
+int _strlen(const char *s);
 int _empty(char *buffer);
 void *_calloc(unsigned int nmemb, unsigned int size);
 int execute_command(char **args);

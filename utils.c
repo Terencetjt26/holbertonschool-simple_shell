@@ -23,31 +23,13 @@ int _strcmp(char *s1, char *s2)
  * @s: string
  * Return: length of the string
  */
-int _strlen(char *s)
+int _strlen(const char *s)
 {
 	int len = 0;
 
 	while (s[len])
 		len++;
 	return (len);
-}
-
-/**
- * _empty - checks if a string is empty
- * @buffer: string to check
- * Return: 1 if empty, 0 if not
- */
-int _empty(char *buffer)
-{
-	int i = 0;
-
-	while (buffer[i])
-	{
-		if (buffer[i] != ' ')
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 /**
@@ -82,7 +64,7 @@ int _atoi(char *s)
  */
 char *_strdup(const char *str)
 {
-	int len = strlen(str);
+	int len = _strlen(str);
 	char *dup = malloc(len + 1);
 
 	if (dup == NULL)
