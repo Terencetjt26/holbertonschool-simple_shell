@@ -16,7 +16,7 @@ void display_prompt(void)
 			if (user)
 				printf("%s@cisfun:%s$ ", user, cwd);
 			else
-				printf("cisfun: %s$ ", cwd);
+				printf("cisfun:%s$ ", cwd);
 		}
 	}
 }

@@ -52,9 +52,7 @@ char *get_path(char *command);
 char *_getenv(char *name);
 int _env(sh_t *data);
 int _atoi(char *s);
-void display_prompt(void);
 int process_input(sh_t *data);
-void sigintH(int sig);
 
 /* Builtin handlers */
 
