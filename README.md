@@ -43,6 +43,9 @@ Simple Shell is a simple UNIX command interpreter written in C. It is designed t
 | `builtins.c` | Implementation of built-in shell commands (cd, exit, env). | [View](builtins.c) |
 | `utils.c` | Utility functions for string manipulation and error handling. | [View](utils.c) |
 | `path.c` | Functions for searching and executing commands in the system PATH. | [View](path.c) |
+| `empty_line.c` | Functions for handling empty lines and comments in user input. | [View](empty_line.c) |
+| `prompt.c` | Functions for displaying the shell prompt and handling user input. | [View](prompt.c) |
+| `input.c` | Functions for reading user input from the command line. | [View](input.c) |
 
 #### Built-in Commands
 | Command | Description |
