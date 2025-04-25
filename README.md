@@ -20,6 +20,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Memory Leak Check](#memory-leak-check)
+- [Flowchart](#flowchart)
 - [Authors &copy;](#authors--copy)
 
 </details>
